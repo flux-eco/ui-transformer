@@ -6,17 +6,17 @@ use FluxEco\UiTransformer\Core\{Ports};
 
 class UserInterfaceApi
 {
-    private Ports\UserInterfaceService $userInterfaceService;
+    private Ports\UiTransformerService $userInterfaceService;
 
-    private function __construct(Ports\UserInterfaceService $userInterfaceService)
+    private function __construct(Ports\UiTransformerService $userInterfaceService)
     {
         $this->userInterfaceService = $userInterfaceService;
     }
 
     public static function new(): self
     {
-        $userInterfaceOutbounds = Configs\UserInterfaceOutbounds::new();
-        $userInterfaceService = Ports\UserInterfaceService::new($userInterfaceOutbounds);
+        $userInterfaceOutbounds = Configs\Outbounds::new();
+        $userInterfaceService = Ports\UiTransformerService::new($userInterfaceOutbounds);
         return new self($userInterfaceService);
     }
 
@@ -31,14 +31,6 @@ class UserInterfaceApi
 
     public function getPageDefinition(string $projectionName): array
     {
-        $uiPage = $this->userInterfaceService->getUiPage($projectionName);
-        return $uiPage->toArray();
-    }
-
-
-    public function getTablePageDefinition(string $projectionName): array
-    {
-        $uiTablePage = $this->userInterfaceService->getUiTablePage($projectionName);
-        return $uiTablePage->toArray();
+        return $this->userInterfaceService->getUiPage($projectionName);
     }
 }

@@ -2,56 +2,53 @@
 
 namespace FluxEco\UiTransformer\Core\Ports;
 
-use FluxEco\UiTransformer\Core\{Domain};
+use FluxEco\UiTransformer\Core\{Application\CommandHandlers,
+    Application\Processes,
+    Domain,
+    Ports\Configs\Outbounds
+};
 
-class UserInterfaceService
+class UiTransformerService
 {
-    private LanguageHandler\LanguageHandlerClient $languageHandlerClient;
-    private UiDefinition\UserInterfaceDefinitionClient $userInterfaceSchemaClient;
-
+    private Outbounds $outbounds;
+    private Processes\TransformUserInterfaceItemsProcess $transformUserInterfaceItemsProcess;
 
     private function __construct(
-        LanguageHandler\LanguageHandlerClient      $languageHandlerClient,
-        UiDefinition\UserInterfaceDefinitionClient $userInterfaceSchemaClient
-    )
-    {
-        $this->languageHandlerClient = $languageHandlerClient;
-        $this->userInterfaceSchemaClient = $userInterfaceSchemaClient;
+        Outbounds $outbounds
+    ) {
+        $this->outbounds = $outbounds;
+        $this->transformUserInterfaceItemsProcess = Processes\TransformUserInterfaceItemsProcess::new($outbounds);
     }
 
-    //todo parameter userSessionKey
-    public static function new(Configs\UserInterfaceOutbounds $userInterfaceOutbounds)
+    public static function new(Outbounds $outbounds) : UiTransformerService
     {
-        //TODO
-        $languageKey = 'de';
-        $languageHandlerClient = $userInterfaceOutbounds->getLanguageHandlerClient($languageKey);
-        $userInterfaceSchemaClient = $userInterfaceOutbounds->getUserInterfaceDefinitionClient();
         return new self(
-            $languageHandlerClient,
-            $userInterfaceSchemaClient
+            $outbounds
         );
     }
 
-
-    public function getPages(): array
+    public function getPages() : array
     {
-        $userInterfaceClient = $this->userInterfaceSchemaClient;
-        $pageDefinitionFiles = $this->userInterfaceSchemaClient->getPageDefinitionFilePaths();
+        $pageListSchemaFile = $this->outbounds->getPageListSchemaFile();
 
-        $pages = [];
-        foreach ($pageDefinitionFiles as $pageDefinitionFile) {
-            $data = yaml_parse(file_get_contents($pageDefinitionFile));
-            $data['title'] = $this->languageHandlerClient->getTranslatedString($data['titleKey']);
-            $pages[] = $data;
-        }
-        return $pages;
+        $uiPageItems = yaml_parse(file_get_contents($pageListSchemaFile));
+        print_r($uiPageItems);
+        $command = CommandHandlers\TransformCommand::new($uiPageItems, pathinfo($pageListSchemaFile, PATHINFO_DIRNAME));
+        return $this->transformUserInterfaceItemsProcess->process($command);
     }
 
-    public function getUiPage(string $pageName): Domain\Models\UiPage
+    public function getUiPage(string $pageName) : array
     {
+        $pageDefinitionFiles = $this->outbounds->getPageDefinitionFilePaths();
+        $pageDefinitionFile = $pageDefinitionFiles[$pageName];
+        $uiPageItems = yaml_parse(file_get_contents($pageDefinitionFile));
+
+        $command = CommandHandlers\TransformCommand::new($uiPageItems, pathinfo($pageDefinitionFile, PATHINFO_DIRNAME));
+        return $this->transformUserInterfaceItemsProcess->process($command);
+
+        /*
         $languageHandlerClient = $this->languageHandlerClient;
         $userInterfaceClient = $this->userInterfaceSchemaClient;
-
 
         $pageTitleKey = $userInterfaceClient->getPageTitleKey($pageName);
         $pageTitle = $languageHandlerClient->getTranslatedString($pageTitleKey);
@@ -69,7 +66,7 @@ class UserInterfaceService
         }
         $formCreate['properties'] = $formItemsCreate;
 
-        echo "********** formCreate *******".PHP_EOL;
+        echo "********** formCreate *******" . PHP_EOL;
         print_r($formCreate);
         echo PHP_EOL;
 
@@ -78,17 +75,18 @@ class UserInterfaceService
         return Domain\Models\UiPage::new(
             $pageTitle,
             $avatar,
+            $userInterfaceClient->getProjectionName($pageName),
             $formCreate,
             $formItemsEdit,
             $itemActions
-        );
+        );*/
     }
 
-    public function getUiTablePage(string $pageName): Domain\Models\UiTablePage
+    /*
+    public function getUiTablePage(string $pageName) : Domain\Models\UiTablePage
     {
         $languageHandlerClient = $this->languageHandlerClient;
         $userInterfaceClient = $this->userInterfaceSchemaClient;
-
 
         $pageTitleKey = $userInterfaceClient->getPageTitleKey($pageName);
         $pageTitle = $languageHandlerClient->getTranslatedString($pageTitleKey);
@@ -99,7 +97,7 @@ class UserInterfaceService
 
         $tableColumns = $userInterfaceClient->getTableDefinition($pageName);
         foreach ($tableColumns as $key => $value) {
-            $tableColumns[$key] = $this->translateLangKey($value, 'titleKey', 'title');
+            //$tableColumns[$key] = $this->translateLangKey($value, 'titleKey', 'title');
         }
 
         return Domain\Models\UiTablePage::new(
@@ -110,12 +108,6 @@ class UserInterfaceService
             $tableColumns
         );
     }
-
-    private function translateLangKey(array $item, string $langKey, string $itemKey): array
-    {
-        $languageHandlerClient = $this->languageHandlerClient;
-        $item[$itemKey] = $languageHandlerClient->getTranslatedString($item[$langKey]);
-        return $item;
-    }
+    */
 
 }
