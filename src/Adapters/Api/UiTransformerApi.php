@@ -4,7 +4,7 @@ namespace FluxEco\UiTransformer\Adapters\Api;
 use FluxEco\UiTransformer\Adapters\{Configs};
 use FluxEco\UiTransformer\Core\{Ports};
 
-class UserInterfaceApi
+class UiTransformerApi
 {
     private Ports\UiTransformerService $userInterfaceService;
 

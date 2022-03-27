@@ -22,7 +22,6 @@ class TransformReferencesHandler implements TransformHandler
     public function handle(TransformCommand $command, array $nextHandlers) : array
     {
         $transformedItem = $command->getUiItem();
-        print_r($command->getUiItem());
         foreach ($command->getUiItem() as $key => $value) {
             if (is_array($value) && key_exists(Models\UiItemKeysEnum::new()->refKey, $value)) {
                 $filePath = $command->getSchemaFileDirectoryPath() . '/' . $value[Models\UiItemKeysEnum::new()->refKey];
