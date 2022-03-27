@@ -11,7 +11,7 @@ class UserInterfaceDefinitionClient implements Ports\UiDefinition\UserInterfaceD
 
     const FILE_NAME_PAGE = 'Page.yaml';
     const FILE_NAME_CREATION_FORM = 'CreationForm.yaml';
-    const FILE_NAME_EDIT_FIELDS = 'EditFields.yaml';
+    const FILE_NAME_EDIT_FIELDS = 'EditForm.yaml';
     const FILE_NAME_TABLE_COLUMNS = 'TableColumns.yaml';
     const FILE_NAME_TABLE_FILTER = 'TableFilter.yaml';
 
@@ -52,7 +52,7 @@ class UserInterfaceDefinitionClient implements Ports\UiDefinition\UserInterfaceD
         $schemaFilePath = $pageSchemasDirectoryPath . '/' . $schemaFileName;
 
         if (is_file($schemaFilePath) === false) {
-            throw new \RuntimeException('No Creation Fields Schema found in:  ' . $pageSchemasDirectoryPath . ' for Schemafilepath: ' . $schemaFilePath . '/' . $schemaFileName);
+            throw new \RuntimeException('No Form Schema found in:  ' . $pageSchemasDirectoryPath . ' for Schemafilepath: ' . $schemaFilePath . '/' . $schemaFileName);
         }
         return $schemaFilePath;
     }
