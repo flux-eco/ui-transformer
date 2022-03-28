@@ -32,9 +32,6 @@
     "ext-json": "*",
     "ext-yaml": "*"
   },
-  "require-dev": {
-
-  },
   "autoload": {
     "psr-4": {
       "FluxEco\\UiTransformer\\": [
