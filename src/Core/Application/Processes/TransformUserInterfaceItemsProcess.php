@@ -24,6 +24,9 @@ class TransformUserInterfaceItemsProcess implements CommandHandlers\TransformHan
             CommandHandlers\TransformLanguageKeysHandler::new(
                 $outbounds
             ),
+            CommandHandlers\TransformMarkdownHandler::new(
+                $outbounds
+            ),
             $this
         ];
     }

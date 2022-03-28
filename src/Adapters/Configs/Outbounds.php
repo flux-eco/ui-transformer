@@ -71,4 +71,11 @@ class Outbounds implements Ports\Configs\Outbounds
 
         return $pageSchemaFiles;
     }
+
+    public function getMarkdownClient() : Ports\Markdown\MarkdownClient
+    {
+        return Adapters\Markdown\MarkdownToHtmlConverterRestApiClient::new(
+            $_ENV["UI_TRANSFORM_MARKDOWN_TO_HTML_CONVERTER_REST_API_URL"] ?? null
+        );
+    }
 }
