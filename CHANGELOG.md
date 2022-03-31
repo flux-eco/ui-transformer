@@ -1,6 +1,10 @@
 # CHANGELOG
 
+[0.0.1]
+* init
+
 [0.0.2]
+
 change: 
 - removed markdown handler from the user interface process
 todo
