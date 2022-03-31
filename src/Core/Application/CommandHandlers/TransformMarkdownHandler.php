@@ -18,6 +18,7 @@ class TransformMarkdownHandler implements TransformHandler
 
     public function handle(TransformCommand $command, array $nextHandlers) : array
     {
+        $item = $command->getUiItem();
         $markdowns = array_map(fn(array $item) : string => $item["TODO: Which key?"], $command->getUiItem());
 
         $htmls = $this->markdown_client->convertMultiple(

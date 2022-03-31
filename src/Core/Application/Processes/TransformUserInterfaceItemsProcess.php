@@ -24,9 +24,9 @@ class TransformUserInterfaceItemsProcess implements CommandHandlers\TransformHan
             CommandHandlers\TransformLanguageKeysHandler::new(
                 $outbounds
             ),
-            CommandHandlers\TransformMarkdownHandler::new(
-                $outbounds
-            ),
+            //CommandHandlers\TransformMarkdownHandler::new(
+            //    $outbounds
+            //),
             $this
         ];
     }
@@ -38,11 +38,8 @@ class TransformUserInterfaceItemsProcess implements CommandHandlers\TransformHan
 
     public function process(CommandHandlers\TransformCommand $command) : array
     {
-        $nextHandler = $this->handlerQueue[0];
-        unset($this->handlerQueue[0]); // remove item at index 0
-        $nextHandlers = array_values($this->handlerQueue); // 'reindex' array
-
-        return $nextHandler->handle($command, $nextHandlers);
+        $nextHandler = array_shift($this->handlerQueue);
+        return $nextHandler->handle($command, $this->handlerQueue);
     }
 
     public function handle(CommandHandlers\TransformCommand $command, array $nextHandlers) : array

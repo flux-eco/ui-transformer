@@ -47,21 +47,11 @@ class TransformLanguageKeysHandler implements TransformHandler
             }
         }
 
-        return $this->process(TransformCommand::new($transformedItem, $command->getSchemaFileDirectoryPath()),
-            $nextHandlers);
-    }
-
-    /**
-     * @param TransformHandler[] $nextHandlers
-     */
-    public function process(TransformCommand $command, array $nextHandlers) : array
-    {
-        $nextHandler = $nextHandlers[0];
-
-        unset($nextHandlers[0]); // remove item at index 0
-        $nextHandlers = array_values($nextHandlers); // 'reindex' array
-
-        return $nextHandler->handle($command, $nextHandlers);
+        $nextHandler = array_shift($nextHandlers);
+        return $nextHandler->handle( TransformCommand::new(
+            $transformedItem,
+            $command->getSchemaFileDirectoryPath()
+        ), $nextHandlers);
     }
 
     final public function translate(string $languageKey) : string
