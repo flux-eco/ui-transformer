@@ -5,8 +5,8 @@
   "type": "flux-app",
   "keywords": [
     "flux-eco",
-    "fluxlabs",
-    "json-schema"
+    "ui-transformer",
+    "fluxlabs"
   ],
   "homepage": "https://fluxlabs.ch",
   "license": "GPL-3.0-only",
