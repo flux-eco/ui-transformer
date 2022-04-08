@@ -1,0 +1,80 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1871002c97fc2e6c4926bb61c832d084",
+    "packages": [
+        {
+            "name": "flux-eco/dot-env",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flux-eco/dot-env.git",
+                "reference": "e051c399ed330961fd0fff2a41c46145c07cf262"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flux-eco/dot-env/zipball/e051c399ed330961fd0fff2a41c46145c07cf262",
+                "reference": "e051c399ed330961fd0fff2a41c46145c07cf262",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "flux-app",
+            "autoload": {
+                "files": [
+                    "fn/loadDotEnv.php"
+                ],
+                "psr-4": {
+                    "fluxDotEnv\\": [
+                        "fn/"
+                    ],
+                    "FluxEco\\DotEnv\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "fluxlabs ag",
+                    "email": "support@fluxlabs.ch",
+                    "homepage": "https://fluxlabs.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Loads .env-Files",
+            "homepage": "https://fluxlabs.ch",
+            "keywords": [
+                "dot-env",
+                "flux-eco",
+                "fluxlabs"
+            ],
+            "support": {
+                "email": "support@fluxlabs.ch",
+                "source": "https://github.com/flux-eco/dot-env/tree/v1.2.0"
+            },
+            "time": "2022-04-08T19:07:37+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-yaml": "*"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

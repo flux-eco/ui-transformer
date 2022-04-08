@@ -29,7 +29,7 @@ class UiTransformerService
 
     public function getPages() : array
     {
-        $pageListSchemaFile = $this->outbounds->getPageListSchemaFile();
+        $pageListSchemaFile = $this->outbounds->getPageListDefinitionFilePath();
 
         $uiPageItems = yaml_parse(file_get_contents($pageListSchemaFile));
         $command = CommandHandlers\TransformCommand::new($uiPageItems, pathinfo($pageListSchemaFile, PATHINFO_DIRNAME));
