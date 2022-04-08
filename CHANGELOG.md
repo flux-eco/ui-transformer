@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## [1.0.0]
+- added functional usage
+
 ## [0.0.2]
 change:
 - removed markdown handler from the user interface process

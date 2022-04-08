@@ -10,6 +10,8 @@ interface Outbounds
 
     public function getLanguageCode() : string;
 
+    public function getPageListDefinitionFilePath() : string;
+
     public function getPageDefinitionFilePaths() : array;
 
     public function getMarkdownClient() : Ports\Markdown\MarkdownClient;

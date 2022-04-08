@@ -1,0 +1,12 @@
+pageTitle:
+  todo: Todo's
+  topic: Thema
+topic:
+  title: Thema
+  description: Beschreibung
+todo:
+  title: ToDo
+  description: Beschreibung
+action:
+  delete: Delete
+  edit: Edit

@@ -1,7 +1,7 @@
 {
   "name": "flux-eco/ui-transformer",
   "description": "Component for flux-capacitor apps developed by fluxlabs ag",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "type": "flux-app",
   "keywords": [
     "flux-eco",
@@ -25,12 +25,20 @@
     "php": ">=8.0",
     "ext-curl": "*",
     "ext-json": "*",
-    "ext-yaml": "*"
+    "ext-yaml": "*",
+    "flux-eco/dot-env": ">=1.2.0"
   },
   "autoload": {
+    "files": [
+      "fn/getPageDefinition.php",
+      "fn/getPages.php"
+    ],
     "psr-4": {
       "FluxEco\\UiTransformer\\": [
         "src/"
+      ],
+      "fluxUiTransformer\\": [
+        "fn/"
       ]
     }
   },

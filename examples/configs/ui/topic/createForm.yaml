@@ -1,0 +1,21 @@
+rootObjectAggregateName: Topic
+properties:
+  - title:
+      type: lngKey
+      key: topic.title
+    key: title
+    dataIndex: title
+    valueType: string
+    width: m
+    formItemProps:
+      rules:
+        - required: true
+          message: Please enter a Title
+  - title:
+      type: lngKey
+      key: topic.description
+    key: description
+    dataIndex: description
+    valueType: textarea
+    width: m
+    formItemProps: [ ]
