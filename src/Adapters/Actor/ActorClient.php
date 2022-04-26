@@ -14,6 +14,7 @@ class ActorClient
 
     public function getLanguageCode(): string {
         //todo
-        return 'en';
+        return 'de';
     }
+
 }

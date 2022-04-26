@@ -76,7 +76,7 @@ class TransformLanguageKeysHandler implements TransformHandler
         $translationsPath = $translations;
         foreach ($keyParts as $keyPart) {
             if (array_key_exists($keyPart, $translationsPath) === false) {
-                throw new \RuntimeException('No Translation found for ' . $key . ' in ' . $this->getLanguageKey() . ' translation file');
+                throw new \RuntimeException('No Translation found for ' . $key);
             }
             $translationsPath = $translationsPath[$keyPart];
         }
