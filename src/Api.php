@@ -38,7 +38,7 @@ class Api
     {
         $data = $this->userInterfaceService->getPages();
         $total = count($data);
-        $result = ['data' => $data, 'status' => 'success', 'total' => $total];
+        $result = ['data' => $data, 'success' => true, 'total' => $total];
         return $result;
     }
 

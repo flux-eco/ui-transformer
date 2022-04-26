@@ -2,7 +2,7 @@
 
 namespace FluxEco\UiTransformer\Adapters;
 
-use FluxEco\UiTransformer\{Adapters, Adapters\Configs\UserInterfaceEnv, Core\Ports};
+use FluxEco\UiTransformer\{Adapters, Core\Ports};
 
 class Outbounds implements Ports\Configs\Outbounds
 {
@@ -81,8 +81,7 @@ class Outbounds implements Ports\Configs\Outbounds
         foreach ($directoryItems as $directoryNameItem) {
             $itemPath = $path . "/" . $directoryNameItem;
             if ($directoryNameItem === self::PAGE_SCHEMA_FILE_NAME) {
-                $projectionName = yaml_parse(file_get_contents($itemPath))['projectionName'];
-                $pageDefinitionFiles[$projectionName] = $itemPath;
+                $pageDefinitionFiles[pathinfo($path, PATHINFO_BASENAME)] = $itemPath;
                 continue;
             }
             if (is_dir($itemPath)) {
